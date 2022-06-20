@@ -24,5 +24,7 @@ module.exports = {
     'react/jsx-filename-extension': 'off',
     'react/function-component-definition': 'off',
     'react/react-in-jsx-scope': 'off',
+    'import/extensions': 'off',
+    '@next/next/no-img-element': 'off',
   },
 };
