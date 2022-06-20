@@ -26,5 +26,6 @@ module.exports = {
     'react/react-in-jsx-scope': 'off',
     'import/extensions': 'off',
     '@next/next/no-img-element': 'off',
+    'no-shadow': 'off',
   },
 };
