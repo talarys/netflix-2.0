@@ -1,5 +1,5 @@
-import type { NextPage } from 'next';
 import Head from 'next/head';
+import type { NextApiResponse } from 'next';
 import Banner from '../components/Banner';
 import Header from '../components/Header';
 import Row from '../components/Row';
@@ -7,17 +7,17 @@ import { Movie } from '../typings';
 import requests from '../utils/request';
 
 interface Props {
-  netflixOriginals: Movie[]
-  trendingNow: Movie[]
-  topRated: Movie[]
-  actionMovies: Movie[]
-  comedyMovies: Movie[]
-  horrorMovies: Movie[]
-  romanceMovies: Movie[]
-  documentaries: Movie[]
+  netflixOriginals: Movie[];
+  trendingNow: Movie[];
+  topRated: Movie[];
+  actionMovies: Movie[];
+  comedyMovies: Movie[];
+  horrorMovies: Movie[];
+  romanceMovies: Movie[];
+  documentaries: Movie[];
 }
 
-const Home: NextPage = ({
+const Home = ({
   netflixOriginals,
   actionMovies,
   comedyMovies,
@@ -26,7 +26,7 @@ const Home: NextPage = ({
   romanceMovies,
   topRated,
   trendingNow,
-}:Props) => (
+}: Props) => (
   <div className="relative h-screen bg-gradient-to-b lg:h-[140vh]">
     <Head>
       <title>Netflix</title>
@@ -50,7 +50,11 @@ const Home: NextPage = ({
   </div>
 );
 
-export const getServerSideProps = async ({ res }) => {
+interface ssr {
+  res: NextApiResponse;
+}
+
+export const getServerSideProps = async ({ res }: ssr) => {
   res.setHeader(
     'Cache-Control',
     'public, s-maxage=10, stale-while-revalidate=59',

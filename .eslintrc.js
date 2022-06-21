@@ -27,5 +27,6 @@ module.exports = {
     'import/extensions': 'off',
     '@next/next/no-img-element': 'off',
     'no-shadow': 'off',
+    'react/jsx-props-no-spreading': 'off',
   },
 };
