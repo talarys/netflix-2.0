@@ -30,7 +30,7 @@ function Login() {
   };
 
   return (
-    <div className="relative flex h-screen w-screen flex-col bg-black md:items-center md:justify-center md:bg-transparent">
+    <div className="relative flex h-screen w-screen flex-col bg-black md:items-center md:justify-center md:bg-transparent brightness-90">
       <Head>
         <title>Netflix</title>
         <link rel="icon" href="/favicon.ico" />
@@ -44,7 +44,7 @@ function Login() {
       <img
         src="/Netflix_logo.svg"
         className="absolute left-4 top-4 cursor-pointer object-contain md:left-10 md:top-6"
-        width={150}
+        width={165}
         height={150}
         alt="netflix logo"
       />
