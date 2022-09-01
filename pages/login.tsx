@@ -23,9 +23,7 @@ function Login() {
     if (login) {
       await signIn(email, password);
     } else {
-      (
-        await signUp(email, password)
-      );
+      await signUp(email, password);
     }
   };
 
