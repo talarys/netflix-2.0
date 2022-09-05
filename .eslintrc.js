@@ -26,5 +26,6 @@ module.exports = {
     'jsx-a11y/label-has-associated-control': 'off',
     'no-console': 'off',
     'react/jsx-no-bind': 'off',
+    'no-unsafe-optional-chaining': 'off',
   },
 };
