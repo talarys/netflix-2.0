@@ -22,6 +22,14 @@ export interface Movie {
   vote_count: number
 }
 
+export interface Trailer {
+  id: number
+  key: string
+  name: string
+  site: string
+  type: string
+}
+
 export interface Element {
   type:
     | 'Bloopers'

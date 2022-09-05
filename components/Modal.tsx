@@ -1,20 +1,25 @@
 import {
-  PlusIcon, ThumbUpIcon, VolumeOffIcon, VolumeUpIcon, XIcon,
+  PlusIcon,
+  ThumbUpIcon,
+  VolumeOffIcon,
+  VolumeUpIcon,
+  XIcon,
 } from '@heroicons/react/outline';
 import MuiModal from '@mui/material/Modal';
 import { useEffect, useState } from 'react';
 import { useRecoilState, useRecoilValue } from 'recoil';
 import ReactPlayer from 'react-player/lazy';
 import { FaPlay } from 'react-icons/fa';
+import { DocumentData } from 'firebase/firestore';
 import { modalState, movieState } from '../atoms/modalAtom';
-import { Genre, Movie } from '../typings';
+import { Genre, Movie, Trailer } from '../typings';
 import { fetchMovieTrailer } from '../utils/request';
 
 function Modal() {
   const [showModal, setShowModal] = useRecoilState(modalState);
-  const currentMovie = useRecoilValue<Movie|null>(movieState);
-  const [trailer, setTrailer] = useState(null);
-  const [genres, setGenres] = useState<Genre[]>(null);
+  const currentMovie = useRecoilValue<Movie | null | DocumentData>(movieState);
+  const [trailer, setTrailer] = useState<Trailer | null>(null);
+  const [genres, setGenres] = useState<Genre[] | null>(null);
   const [muted, setMuted] = useState(true);
 
   function handleClose() {
@@ -28,7 +33,7 @@ function Modal() {
       const data = await fetchMovieTrailer(currentMovie).then((r) => r.json());
 
       const trailers = data?.videos?.results.filter(
-        (t) => t.type === 'Trailer',
+        (t: Trailer) => t.type === 'Trailer',
       );
 
       setTrailer(trailers.length ? trailers[0] : data?.videos?.results[0]);
@@ -87,9 +92,11 @@ function Modal() {
               <ThumbUpIcon className="h-7 w-7" />
             </button>
             <button className="modalButton" onClick={() => setMuted(!muted)}>
-              {muted
-                ? <VolumeOffIcon className="w-7 h-7" />
-                : <VolumeUpIcon className="w-7 hs-7" /> }
+              {muted ? (
+                <VolumeOffIcon className="w-7 h-7" />
+              ) : (
+                <VolumeUpIcon className="w-7 hs-7" />
+              )}
             </button>
           </div>
         </div>
