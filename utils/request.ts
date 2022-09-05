@@ -1,3 +1,6 @@
+import { DocumentData } from 'firebase/firestore';
+import { Movie } from '../typings';
+
 const API_KEY = process.env.NEXT_PUBLIC_API_KEY;
 const BASE_URL = 'https://api.themoviedb.org/3';
 
@@ -12,9 +15,11 @@ const requests = {
   fetchDocumentaries: `${BASE_URL}/discover/movie?api_key=${API_KEY}&language=en-US&with_genres=99`,
 };
 
-export async function fetchMovieTrailer(movie) {
+export async function fetchMovieTrailer(movie: Movie | DocumentData) {
   return fetch(
-    `${BASE_URL}/${movie?.media_type === 'tv' ? 'tv' : 'movie'}/${movie?.id}?api_key=${API_KEY}&language=en-US&append_to_response=videos`,
+    `${BASE_URL}/${movie?.media_type === 'tv' ? 'tv' : 'movie'}/${
+      movie?.id
+    }?api_key=${API_KEY}&language=en-US&append_to_response=videos`,
   );
 }
 
