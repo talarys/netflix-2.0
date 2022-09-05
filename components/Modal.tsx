@@ -76,21 +76,21 @@ function Modal() {
             loop
             muted={muted}
           />
-        </div>
-        {/* Buttons */}
-        <div className="absolute bottom-5 flex w-full items-center justify-between px-10">
-          <div className="flex space-x-2">
-            {/* PlayButton */}
-            <button className="font-semibold px-9 py-2 flex items-center gap-x-2 rounded bg-white text-black transition hover:bg-[#e6e6e6]">
-              <FaPlay className="w-6 h-6" />
-              Play
-            </button>
-            <button className="modalButton">
-              <PlusIcon className="h-7 w-7" />
-            </button>
-            <button className="modalButton">
-              <ThumbUpIcon className="h-7 w-7" />
-            </button>
+          {/* Buttons */}
+          <div className="absolute bottom-5 flex w-full items-center justify-between px-10">
+            <div className="flex space-x-2">
+              {/* PlayButton */}
+              <button className="font-semibold px-9 py-2 flex items-center gap-x-2 rounded bg-white text-black transition hover:bg-[#e6e6e6]">
+                <FaPlay className="w-6 h-6" />
+                Play
+              </button>
+              <button className="modalButton">
+                <PlusIcon className="h-7 w-7" />
+              </button>
+              <button className="modalButton">
+                <ThumbUpIcon className="h-7 w-7" />
+              </button>
+            </div>
             <button className="modalButton" onClick={() => setMuted(!muted)}>
               {muted ? (
                 <VolumeOffIcon className="w-7 h-7" />
