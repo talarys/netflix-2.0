@@ -17,8 +17,8 @@
 @font-face {
   font-family: "Netflix Sans";
   src: url("/fonts/NetflixSans-Light.woff2") format(woff2);
-  font-weight: Light;
-  font-style: Light;
+  font-weight: light;
+  font-style: light;
 }
 @font-face {
   font-family: "Netflix Sans";
