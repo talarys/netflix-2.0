@@ -1,6 +1,7 @@
 import Head from 'next/head';
 import type { NextApiResponse } from 'next';
 import { useRecoilValue } from 'recoil';
+import { Product } from '@stripe/firestore-stripe-payments';
 import Banner from '../components/Banner';
 import Header from '../components/Header';
 import Row from '../components/Row';
@@ -10,16 +11,18 @@ import useAuth from '../hooks/useAuth';
 import { modalState } from '../atoms/modalAtom';
 import Modal from '../components/Modal';
 import Plans from '../components/Plans';
+import { stripe } from '../lib/stripe';
 
 interface Props {
-  netflixOriginals: Movie[];
-  trendingNow: Movie[];
-  topRated: Movie[];
-  actionMovies: Movie[];
-  comedyMovies: Movie[];
-  horrorMovies: Movie[];
-  romanceMovies: Movie[];
-  documentaries: Movie[];
+  netflixOriginals: Movie[]
+  trendingNow: Movie[]
+  topRated: Movie[]
+  actionMovies: Movie[]
+  comedyMovies: Movie[]
+  horrorMovies: Movie[]
+  romanceMovies: Movie[]
+  documentaries: Movie[]
+  products: Product[]
 }
 
 const Home = ({
@@ -31,6 +34,7 @@ const Home = ({
   romanceMovies,
   topRated,
   trendingNow,
+  products,
 }: Props) => {
   const { loading } = useAuth();
   const showModal = useRecoilValue(modalState);
@@ -40,7 +44,7 @@ const Home = ({
 
   if (!subscription) {
     return (
-      <Plans />
+      <Plans products={products.data} />
     );
   }
 
@@ -79,6 +83,8 @@ export const getServerSideProps = async ({ res }: ssr) => {
     'public, s-maxage=10, stale-while-revalidate=59',
   );
 
+  const products = await stripe.products.list({ expand: ['data.default_price'] });
+
   const [
     netflixOriginals,
     trendingNow,
@@ -109,6 +115,7 @@ export const getServerSideProps = async ({ res }: ssr) => {
       horrorMovies: horrorMovies.results,
       romanceMovies: romanceMovies.results,
       documentaries: documentaries.results,
+      products,
     },
   };
 };

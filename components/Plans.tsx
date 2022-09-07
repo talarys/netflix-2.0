@@ -1,12 +1,19 @@
 import { CheckIcon } from '@heroicons/react/24/outline';
+import { Product } from '@stripe/firestore-stripe-payments';
 import Head from 'next/head';
 import Link from 'next/link';
 import { useState } from 'react';
 import useAuth from '../hooks/useAuth';
 
-function Plans() {
+interface Props{
+  products: Product[]
+}
+
+function Plans({ products } : Props) {
   const { logout } = useAuth();
   const [plan, setPlan] = useState('premium');
+
+  products.sort((a, b) => a.default_price.unit_amount > b.default_price.unit_amount);
 
   return (
     <div>
@@ -62,51 +69,27 @@ function Plans() {
           </div>
           {/* Right */}
           <div className="flex gap-x-14 text-center">
-            {/* Basic */}
-            <div
-              className={`flex flex-col gap-y-6 items-center ${plan === 'basic' && 'text-[#e50914]'}`}
-              onClick={() => setPlan('basic')}
-            >
-              <div className={`bg-[#ef6b72] !text-white flex items-center justify-center h-[120px] w-[120px] rounded-sm 
-              ${plan === 'basic' && 'selectedPlan'}`}
+            {/* Plans */}
+            {products.map((product) => (
+              <div
+                className={`flex flex-col gap-y-6 items-center ${plan === product.name && 'text-[#e50914]'}`}
+                onClick={() => setPlan(product.name)}
+                key={product.key}
               >
-                Basic
+                <div className={`bg-[#ef6b72] !text-white flex items-center justify-center h-[120px] w-[120px] rounded-sm 
+              ${plan === product.name && 'selectedPlan'}`}
+                >
+                  {product.name}
+                </div>
+                <div>
+                  $
+                  {product.default_price.unit_amount! / 100}
+                </div>
+                <div>{product.metadata.videoQuality}</div>
+                <div>{product.metadata.resolution}</div>
+                <div><CheckIcon className="w-7 h-7" /></div>
               </div>
-              <div>$7.99</div>
-              <div>Good</div>
-              <div>480p</div>
-              <div><CheckIcon className="w-7 h-7" /></div>
-            </div>
-            {/* Standard */}
-            <div
-              className={`flex flex-col gap-y-6 items-center ${plan === 'standard' && 'text-[#e50914]'}`}
-              onClick={() => setPlan('standard')}
-            >
-              <div className={`bg-[#ef6b72] !text-white flex items-center justify-center h-[120px] w-[120px] rounded-sm 
-              ${plan === 'standard' && 'selectedPlan'}`}
-              >
-                Standard
-              </div>
-              <div>$12.99</div>
-              <div>Better</div>
-              <div>1080p</div>
-              <div><CheckIcon className="w-7 h-7" /></div>
-            </div>
-            {/* Premium */}
-            <div
-              className={`flex flex-col gap-y-6 items-center ${plan === 'premium' && 'text-[#e50914]'}`}
-              onClick={() => setPlan('premium')}
-            >
-              <div className={`bg-[#ef6b72] !text-white flex items-center justify-center h-[120px] w-[120px] rounded-sm 
-              ${plan === 'premium' && 'selectedPlan'}`}
-              >
-                Premium
-              </div>
-              <div>$17.99</div>
-              <div>Best</div>
-              <div>4K+HDR</div>
-              <div><CheckIcon className="w-7 h-7" /></div>
-            </div>
+            ))}
           </div>
         </div>
         <p className="text-xs text-[gray] mt-6">
