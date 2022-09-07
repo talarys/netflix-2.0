@@ -1,9 +1,9 @@
 import {
   PlusIcon,
-  ThumbUpIcon,
-  VolumeOffIcon,
-  VolumeUpIcon,
-  XIcon,
+  HandThumbUpIcon,
+  SpeakerXMarkIcon,
+  SpeakerWaveIcon,
+  XMarkIcon,
 } from '@heroicons/react/24/outline';
 import MuiModal from '@mui/material/Modal';
 import { useEffect, useState } from 'react';
@@ -57,7 +57,7 @@ function Modal() {
           className="modalButton absolute right-5 top-5 !z-40 h-9 w-9 border-none
           bg-[#181818] hover:bg-[#181818]"
         >
-          <XIcon className="h-6 w-6" />
+          <XMarkIcon className="h-6 w-6" />
         </button>
         {/* Player */}
         <div className="relative pt-[56.25%]">
@@ -88,14 +88,14 @@ function Modal() {
                 <PlusIcon className="h-7 w-7" />
               </button>
               <button className="modalButton">
-                <ThumbUpIcon className="h-7 w-7" />
+                <HandThumbUpIcon className="h-7 w-7" />
               </button>
             </div>
             <button className="modalButton" onClick={() => setMuted(!muted)}>
               {muted ? (
-                <VolumeOffIcon className="w-7 h-7" />
+                <SpeakerXMarkIcon className="w-7 h-7" />
               ) : (
-                <VolumeUpIcon className="w-7 hs-7" />
+                <SpeakerWaveIcon className="w-7 hs-7" />
               )}
             </button>
           </div>
