@@ -45,9 +45,10 @@ function Modal() {
   if (!trailer) return null;
   return (
     <MuiModal
-      className="fixed !top-7 left-0 right-0 mx-auto max-w-6xl overflow-hidden overflow-y-scroll scrollbar-hide"
+      className="fixed !top-7 left-0 right-0 mx-auto max-w-6xl overflow-hidden overflow-y-scroll scrollbar-hide !outline-0"
       open={showModal}
       onClose={handleClose}
+      disableAutoFocus
     >
       {/* Modal Container */}
       <div className="relative mx-5 overflow-hidden rounded-t-xl">
