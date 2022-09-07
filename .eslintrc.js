@@ -27,5 +27,8 @@ module.exports = {
     'no-console': 'off',
     'react/jsx-no-bind': 'off',
     'no-unsafe-optional-chaining': 'off',
+    'max-len': 'off',
+    'jsx-a11y/click-events-have-key-events': 'off',
+    'jsx-a11y/no-static-element-interactions': 'off',
   },
 };

@@ -9,6 +9,7 @@ import requests from '../utils/request';
 import useAuth from '../hooks/useAuth';
 import { modalState } from '../atoms/modalAtom';
 import Modal from '../components/Modal';
+import Plans from '../components/Plans';
 
 interface Props {
   netflixOriginals: Movie[];
@@ -33,7 +34,16 @@ const Home = ({
 }: Props) => {
   const { loading } = useAuth();
   const showModal = useRecoilValue(modalState);
-  if (loading) return null;
+  const subscription = false;
+
+  if (loading || subscription === null) return null;
+
+  if (!subscription) {
+    return (
+      <Plans />
+    );
+  }
+
   return (
     <div className="relative h-screen bg-gradient-to-b lg:h-[140vh]">
       <Head>
