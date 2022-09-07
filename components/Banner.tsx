@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import Image from 'next/image';
 import { FaPlay } from 'react-icons/fa';
-import { InformationCircleIcon } from '@heroicons/react/outline';
+import { InformationCircleIcon } from '@heroicons/react/24/outline';
 import { useSetRecoilState } from 'recoil';
 import { Movie } from '../typings';
 import { baseUrl } from '../constants/movie';

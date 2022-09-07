@@ -1,4 +1,4 @@
-import { ChevronLeftIcon, ChevronRightIcon } from '@heroicons/react/outline';
+import { ChevronLeftIcon, ChevronRightIcon } from '@heroicons/react/24/outline';
 import { useRef, useState } from 'react';
 import { Movie } from '../typings';
 import Thumbnail from './Thumbnail';

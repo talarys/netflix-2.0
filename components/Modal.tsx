@@ -4,7 +4,7 @@ import {
   VolumeOffIcon,
   VolumeUpIcon,
   XIcon,
-} from '@heroicons/react/outline';
+} from '@heroicons/react/24/outline';
 import MuiModal from '@mui/material/Modal';
 import { useEffect, useState } from 'react';
 import { useRecoilState, useRecoilValue } from 'recoil';

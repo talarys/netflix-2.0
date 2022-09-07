@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { BellIcon, SearchIcon } from '@heroicons/react/solid';
+import { BellIcon, MagnifyingGlassIcon } from '@heroicons/react/20/solid';
 import Link from 'next/link';
 
 function Header() {
@@ -41,7 +41,7 @@ function Header() {
         </ul>
       </div>
       <div className="flex items-center space-x-4 text-sm font-light">
-        <SearchIcon className="h-6 w-6" />
+        <MagnifyingGlassIcon className="h-6 w-6" />
         <p className="hidden lg:inline">Kids</p>
         <BellIcon className="h-6 w-6" />
         <Link href="/account">
