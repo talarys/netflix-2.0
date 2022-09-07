@@ -1,4 +1,4 @@
-import { CheckIcon } from '@heroicons/react/outline';
+import { CheckIcon } from '@heroicons/react/24/outline';
 import Head from 'next/head';
 import Link from 'next/link';
 import { useState } from 'react';
