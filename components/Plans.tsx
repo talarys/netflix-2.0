@@ -1,5 +1,4 @@
 import { CheckIcon } from '@heroicons/react/24/outline';
-import { selectClasses } from '@mui/material';
 import { Product } from '@stripe/firestore-stripe-payments';
 import Head from 'next/head';
 import Link from 'next/link';
