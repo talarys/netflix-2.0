@@ -31,7 +31,7 @@ function Plans() {
           Sign Out
         </button>
       </header>
-      <main className="pt-28 mx-auto max-w-3xl">
+      <main className="pt-28 mx-auto max-w-4xl">
         <h1 className="mb-3 text-3xl font-medium">
           Choose the plan thats right for you
         </h1>
@@ -54,7 +54,7 @@ function Plans() {
         <div className="flex justify-between mt-10 gap-x-6 font-light">
           {/* Left text */}
           <div className="flex flex-col gap-y-6">
-            <div className="h-[100px] w-[100px]" />
+            <div className="h-[120px] w-[120px]" />
             <div>Monthly price</div>
             <div>Video quality</div>
             <div>Resolution</div>
@@ -67,7 +67,7 @@ function Plans() {
               className={`flex flex-col gap-y-6 items-center ${plan === 'basic' && 'text-[#e50914]'}`}
               onClick={() => setPlan('basic')}
             >
-              <div className={`bg-[#ef6b72] !text-white flex items-center justify-center h-[100px] w-[100px] rounded-sm 
+              <div className={`bg-[#ef6b72] !text-white flex items-center justify-center h-[120px] w-[120px] rounded-sm 
               ${plan === 'basic' && 'selectedPlan'}`}
               >
                 Basic
@@ -82,7 +82,7 @@ function Plans() {
               className={`flex flex-col gap-y-6 items-center ${plan === 'standard' && 'text-[#e50914]'}`}
               onClick={() => setPlan('standard')}
             >
-              <div className={`bg-[#ef6b72] !text-white flex items-center justify-center h-[100px] w-[100px] rounded-sm 
+              <div className={`bg-[#ef6b72] !text-white flex items-center justify-center h-[120px] w-[120px] rounded-sm 
               ${plan === 'standard' && 'selectedPlan'}`}
               >
                 Standard
@@ -97,7 +97,7 @@ function Plans() {
               className={`flex flex-col gap-y-6 items-center ${plan === 'premium' && 'text-[#e50914]'}`}
               onClick={() => setPlan('premium')}
             >
-              <div className={`bg-[#ef6b72] !text-white flex items-center justify-center h-[100px] w-[100px] rounded-sm 
+              <div className={`bg-[#ef6b72] !text-white flex items-center justify-center h-[120px] w-[120px] rounded-sm 
               ${plan === 'premium' && 'selectedPlan'}`}
               >
                 Premium
