@@ -1,17 +1,27 @@
 import { CheckIcon } from '@heroicons/react/24/outline';
+import { selectClasses } from '@mui/material';
 import { Product } from '@stripe/firestore-stripe-payments';
 import Head from 'next/head';
 import Link from 'next/link';
 import { useState } from 'react';
 import useAuth from '../hooks/useAuth';
+import { loadCheckout } from '../lib/stripe';
 
 interface Props{
   products: Product[]
 }
 
 function Plans({ products } : Props) {
-  const { logout } = useAuth();
-  const [plan, setPlan] = useState('premium');
+  const { logout, user } = useAuth();
+  const [plan, setPlan] = useState(products[products.length - 1]);
+  const [isBillingLoading, setIsBillingLoading] = useState(false);
+
+  const subscribeToPlan = () => {
+    if (!user) return null;
+    loadCheckout(plan?.default_price?.id);
+    setIsBillingLoading(true);
+    return 0;
+  };
 
   products.sort((a, b) => a.default_price.unit_amount > b.default_price.unit_amount);
 
@@ -72,12 +82,12 @@ function Plans({ products } : Props) {
             {/* Plans */}
             {products.map((product) => (
               <div
-                className={`flex flex-col gap-y-6 items-center ${plan === product.name && 'text-[#e50914]'}`}
-                onClick={() => setPlan(product.name)}
-                key={product.key}
+                className={`flex flex-col gap-y-6 items-center ${plan.name === product.name && 'text-[#e50914]'}`}
+                onClick={() => setPlan(product)}
+                key={product.id}
               >
                 <div className={`bg-[#ef6b72] !text-white flex items-center justify-center h-[120px] w-[120px] rounded-sm 
-              ${plan === product.name && 'selectedPlan'}`}
+              ${plan.name === product.name && 'selectedPlan'}`}
                 >
                   {product.name}
                 </div>
@@ -98,7 +108,17 @@ function Plans({ products } : Props) {
         <p className="text-xs text-[gray] mt-2">
           Only people who live with you may use your account. Watch on 4 different devices at the same time with Premium, 2 with Standard and 1 with Basic.
         </p>
-        <button className="flex justify-center items-center mx-auto mt-4 bg-[#f6121d] py-3 px-[150px] text-xl rounded-sm">Next</button>
+        <button
+          disabled={!plan || isBillingLoading}
+          className="flex justify-center items-center mx-auto mt-6 bg-[#f6121d] h-14 w-[400px] text-xl rounded-sm"
+          onClick={subscribeToPlan}
+        >
+          {isBillingLoading ? (
+            <img src="/oval.svg" alt="loading" />
+          ) : (
+            'Subscribe'
+          )}
+        </button>
       </main>
     </div>
   );
