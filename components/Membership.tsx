@@ -27,7 +27,7 @@ function Membership() {
           onClick={manageSubscription}
         >
           {isBillingLoading ? (
-            <img className="h-7 w-7" src="/ovalBlack.svg" alt="loading" />
+            <img className="h-7 w-7" src="/ovalRed.svg" alt="loading" />
           ) : (
             'Cancel Membership'
           )}
