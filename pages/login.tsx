@@ -14,10 +14,8 @@ function Login() {
   const { signIn, signUp } = useAuth();
 
   const {
-    register, handleSubmit, watch, formState: { errors },
+    register, handleSubmit, formState: { errors },
   } = useForm<Inputs>();
-
-  console.log(watch('email'));
 
   const onSubmit: SubmitHandler<Inputs> = async ({ email, password }) => {
     if (login) {
