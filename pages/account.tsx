@@ -2,7 +2,6 @@ import { Product } from '@stripe/firestore-stripe-payments';
 import { GetStaticProps } from 'next';
 import Head from 'next/head';
 import Link from 'next/link';
-import { useState } from 'react';
 import Membership from '../components/Membership';
 import useAuth from '../hooks/useAuth';
 import useSubscription from '../hooks/useSubscription';
