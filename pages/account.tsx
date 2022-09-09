@@ -13,9 +13,8 @@ interface Props{
 }
 
 function account({ products }:Props) {
-  const { user, logout, loading } = useAuth();
+  const { user, logout } = useAuth();
   const subscription = useSubscription(user);
-  const [billingLoading, setBillingLoading] = useState(false);
 
   return (
     <div>
