@@ -22,6 +22,7 @@ function Plans({ products } : Props) {
     return 0;
   };
 
+  // @ts-ignore
   products.sort((a, b) => a.default_price.unit_amount > b.default_price.unit_amount);
 
   return (

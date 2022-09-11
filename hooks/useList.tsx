@@ -6,6 +6,7 @@ import { Movie } from '../typings';
 export default function useList(uid: string | undefined) {
   const [list, setList] = useState<Movie[] | DocumentData>([]);
 
+  // @ts-ignore
   useEffect(() => {
     if (!uid) return null;
     useEffect(() => onSnapshot(

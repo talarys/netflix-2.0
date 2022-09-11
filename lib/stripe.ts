@@ -6,6 +6,7 @@ import { getFunctions, httpsCallable } from 'firebase/functions';
 import Stripe from 'stripe';
 import app from './firebase';
 
+// @ts-ignore
 export const stripe = new Stripe(process.env.NEXT_PUBLIC_STRIPE_KEY);
 
 const payments = getStripePayments(app, {

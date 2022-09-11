@@ -47,6 +47,7 @@ function account({ products }:Props) {
             <p className="text-xs font-semibold text-[#555]">
               Member since
               {' '}
+              {/* @ts-ignore */}
               {new Date(subscription?.created).toLocaleDateString('en-US', {
                 month: 'long', year: 'numeric',
               })}

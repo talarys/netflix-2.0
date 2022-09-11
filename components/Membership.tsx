@@ -50,6 +50,7 @@ function Membership() {
               {subscription?.cancel_at_period_end
                 ? 'Your membership will end on '
                 : 'Your next billing date is '}
+              {/* @ts-ignore */}
               {new Date(subscription?.current_period_end).toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' })}
             </p>
           </div>
