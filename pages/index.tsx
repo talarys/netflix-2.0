@@ -13,6 +13,7 @@ import Modal from '../components/Modal';
 import Plans from '../components/Plans';
 import { stripe } from '../lib/stripe';
 import useSubscription from '../hooks/useSubscription';
+import useList from '../hooks/useList';
 
 interface Props {
   netflixOriginals: Movie[]
@@ -40,6 +41,7 @@ const Home = ({
   const { loading, user } = useAuth();
   const showModal = useRecoilValue(modalState);
   const subscription = useSubscription(user);
+  const list = useList(user?.uid);
 
   if (loading || subscription === null) return null;
 
@@ -63,6 +65,7 @@ const Home = ({
           <Row title="Top Rated" movies={topRated} />
           <Row title="Action Thrillers" movies={actionMovies} />
           {/* TODO: My list */}
+          {list.length && <Row title="My List" movies={list} />}
           <Row title="Comedies" movies={comedyMovies} />
           <Row title="Scary Movies" movies={horrorMovies} />
           <Row title="Romance Movies" movies={romanceMovies} />
