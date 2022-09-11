@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { BellIcon, MagnifyingGlassIcon } from '@heroicons/react/20/solid';
 import Link from 'next/link';
+import BasicMenu from './BasicMenu';
 
 function Header() {
   const [isScrolled, setIsScrolled] = useState(false);
@@ -31,6 +32,8 @@ function Header() {
           alt="logo"
           src="/Netflix_logo.svg"
         />
+
+        <BasicMenu />
 
         <ul className="hidden space-x-4 md:flex">
           <li className="headerLink">Home</li>
