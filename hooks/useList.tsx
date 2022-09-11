@@ -3,13 +3,13 @@ import { useEffect, useState } from 'react';
 import { db } from '../lib/firebase';
 import { Movie } from '../typings';
 
-export default function useList(uid: string | undefined) {
-  const [list, setList] = useState<Movie[] | DocumentData>([]);
+function useList(uid: string | undefined) {
+  const [list, setList] = useState<DocumentData[] | Movie[]>([]);
 
-  // @ts-ignore
   useEffect(() => {
-    if (!uid) return null;
-    useEffect(() => onSnapshot(
+    if (!uid) return;
+
+    return onSnapshot(
       collection(db, 'customers', uid, 'myList'),
       (snapshot) => {
         setList(
@@ -19,8 +19,10 @@ export default function useList(uid: string | undefined) {
           })),
         );
       },
-    ));
-
-    return list;
+    );
   }, [db, uid]);
+
+  return list;
 }
+
+export default useList;
