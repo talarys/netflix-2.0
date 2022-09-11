@@ -29,7 +29,7 @@ function Modal() {
   const [genres, setGenres] = useState<Genre[] | null>(null);
   const [muted, setMuted] = useState(true);
   const [addedToList, setAddedToList] = useState(false);
-  const [movies, setMovies] = useState<Movie[]>([]);
+  const [movies, setMovies] = useState<Movie[] | DocumentData>([]);
   const { user } = useAuth();
 
   async function handleList() {
@@ -69,7 +69,7 @@ function Modal() {
   // Check if the movie is already in the user's list
   useEffect(
     () => setAddedToList(
-      movies.findIndex((result) => result.data().id === currentMovie?.id) !== -1,
+      movies.findIndex((result: any) => result.data().id === currentMovie?.id) !== -1,
     ),
     [movies],
   );
