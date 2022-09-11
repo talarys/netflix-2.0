@@ -32,6 +32,16 @@ function Modal() {
   const [movies, setMovies] = useState<Movie[] | DocumentData>([]);
   const { user } = useAuth();
 
+  const toastStyle = {
+    background: 'white',
+    color: 'black',
+    fontWeight: 'bold',
+    fontSize: '16px',
+    padding: '15px',
+    borderRadius: '9999px',
+    maxWidth: '1000px',
+  };
+
   async function handleList() {
     if (addedToList) {
       // Delete it from myList
@@ -39,7 +49,7 @@ function Modal() {
 
       toast(
         `${currentMovie?.title || currentMovie?.original_name} has been removed from My List`,
-        { duration: 2000 },
+        { duration: 2000, style: toastStyle },
       );
     } else {
       // Add it to myList
@@ -47,7 +57,7 @@ function Modal() {
 
       toast(
         `${currentMovie?.title || currentMovie?.original_name} has been added to My List.`,
-        { duration: 2000 },
+        { duration: 2000, style: toastStyle },
       );
     }
   }
