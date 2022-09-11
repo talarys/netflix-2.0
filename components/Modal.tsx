@@ -4,16 +4,23 @@ import {
   SpeakerXMarkIcon,
   SpeakerWaveIcon,
   XMarkIcon,
+  CheckIcon,
 } from '@heroicons/react/24/outline';
 import MuiModal from '@mui/material/Modal';
 import { useEffect, useState } from 'react';
 import { useRecoilState, useRecoilValue } from 'recoil';
 import ReactPlayer from 'react-player/lazy';
 import { FaPlay } from 'react-icons/fa';
-import { DocumentData } from 'firebase/firestore';
+import {
+  collection,
+  deleteDoc, doc, DocumentData, onSnapshot, setDoc,
+} from 'firebase/firestore';
+import toast from 'react-hot-toast';
 import { modalState, movieState } from '../atoms/modalAtom';
 import { Genre, Movie, Trailer } from '../typings';
 import { fetchMovieTrailer } from '../utils/request';
+import useAuth from '../hooks/useAuth';
+import { db } from '../lib/firebase';
 
 function Modal() {
   const [showModal, setShowModal] = useRecoilState(modalState);
@@ -21,10 +28,51 @@ function Modal() {
   const [trailer, setTrailer] = useState<Trailer | null>(null);
   const [genres, setGenres] = useState<Genre[] | null>(null);
   const [muted, setMuted] = useState(true);
+  const [addedToList, setAddedToList] = useState(false);
+  const [movies, setMovies] = useState<Movie[]>([]);
+  const { user } = useAuth();
+
+  async function handleList() {
+    if (addedToList) {
+      // Delete it from myList
+      await deleteDoc(doc(db, 'customers', user!.uid, 'myList', currentMovie?.id.toString()!));
+
+      toast(
+        `${currentMovie?.title || currentMovie?.original_name} has been removed from My List`,
+        { duration: 2000 },
+      );
+    } else {
+      // Add it to myList
+      await setDoc(doc(db, 'customers', user!.uid, 'myList', currentMovie?.id.toString()!), { ...currentMovie });
+
+      toast(
+        `${currentMovie?.title || currentMovie?.original_name} has been added to My List.`,
+        { duration: 2000 },
+      );
+    }
+  }
 
   function handleClose() {
     setShowModal(false);
   }
+
+  // Find all the movies in the user's list
+  useEffect(() => {
+    if (user) {
+      return onSnapshot(
+        collection(db, 'customers', user.uid, 'myList'),
+        (snapshot) => setMovies(snapshot.docs),
+      );
+    }
+  }, [db, currentMovie?.id]);
+
+  // Check if the movie is already in the user's list
+  useEffect(
+    () => setAddedToList(
+      movies.findIndex((result) => result.data().id === currentMovie?.id) !== -1,
+    ),
+    [movies],
+  );
 
   useEffect(() => {
     if (!currentMovie) return;
@@ -85,8 +133,13 @@ function Modal() {
                 <FaPlay className="w-6 h-6" />
                 Play
               </button>
-              <button className="modalButton">
-                <PlusIcon className="h-7 w-7" />
+              <button
+                onClick={handleList}
+                className="modalButton"
+              >
+                {addedToList
+                  ? <CheckIcon className="h-7 w-7" />
+                  : <PlusIcon className="h-7 w-7" />}
               </button>
               <button className="modalButton">
                 <HandThumbUpIcon className="h-7 w-7" />
