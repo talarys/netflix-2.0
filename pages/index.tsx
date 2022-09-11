@@ -45,7 +45,7 @@ const Home = ({
 
   if (!subscription) {
     return (
-      <Plans products={products.data} />
+      <Plans products={products} />
     );
   }
 
@@ -84,7 +84,7 @@ export const getServerSideProps = async ({ res }: ssr) => {
     'public, s-maxage=10, stale-while-revalidate=59',
   );
 
-  const products = await stripe.products.list({ expand: ['data.default_price'] });
+  const { data: products } = await stripe.products.list({ expand: ['data.default_price'] });
 
   const [
     netflixOriginals,
