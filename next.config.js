@@ -7,4 +7,5 @@ module.exports = withTM({
   images: {
     domains: ['image.tmdb.org'],
   },
+  output: 'standalone',
 });

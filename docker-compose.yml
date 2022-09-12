@@ -1,0 +1,11 @@
+version: "4"
+services:
+  netflix:
+    build: .
+    ports: 
+      - '3000:3000'
+    environment:
+      # OMDb API Key
+      - NEXT_PUBLIC_API_KEY=
+      # Stripe Key
+      - NEXT_PUBLIC_STRIPE_KEY=
