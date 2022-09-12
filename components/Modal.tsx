@@ -178,9 +178,9 @@ function Modal() {
                 HD
               </div>
             </div>
-            <div className="flex flex-col gap-x-10 gap-y-4 font-light md:flex-row">
-              <p className="w-5/6">{currentMovie?.overview}</p>
-              <div className="flex flex-col space-y-3 text-sm">
+            <div className="flex items-center flex-col gap-x-10 gap-y-4 font-light md:flex-row">
+              <p className="w-5/6 text-justify">{currentMovie?.overview}</p>
+              <div className="flex flex-col space-y-4 text-sm">
                 <div>
                   <span className="text-[gray]">Genres:</span>
                   {' '}
