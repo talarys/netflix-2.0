@@ -53,6 +53,7 @@ function Login() {
         <div className="space-y-4">
           <label className="inline-block w-full">
             <input
+              defaultValue="john@doe.com"
               type="email"
               placeholder="Email"
               className={`input ${
@@ -68,6 +69,7 @@ function Login() {
           </label>
           <label className="inline-block w-full">
             <input
+              defaultValue="12341234"
               type="password"
               {...register('password', { required: true, minLength: 8 })}
               placeholder="Password"
